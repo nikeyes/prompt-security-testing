@@ -1,0 +1,76 @@
+[project]
+name = "prompt-security-testing"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "boto3>=1.40.17",
+    "pyyaml>=6.0.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.1",
+    "pytest-cov>=6.2.1",
+    "ruff>=0.12.10",
+    "yamllint>=1.37.1",
+]
+
+[tool.ruff]
+extend-include = ["*.ipynb"]
+line-length = 140
+# Added from flake8 config
+lint.select = ["E", "F", "G"] # G is the flake8-logging-format extension
+lint.ignore = [
+    "S101", # Use of assert detected (useless with pytest)
+    "S301", # It is OK to use Pickle in this project
+    "S403", # It is OK to use Pickle in this project  
+    # Converted from pylint disable
+    "D",       # All missing-docstring rules (D100-D107)
+    "E402",    # import-outside-toplevel
+    "PLR0913", # too-many-arguments
+    "PLR0914", # too-many-locals
+    "PLW0603", # global-statement
+]
+exclude = [".git", ".venv"]
+
+[tool.ruff.format]
+quote-style = "single"
+
+# Pylint complexity settings
+[tool.ruff.lint.pylint]
+max-args = 5
+max-bool-expr = 5
+max-nested-blocks = 2
+max-public-methods = 10
+max-returns = 5
+max-statements = 50
+
+# Pylint ignored classes
+[tool.ruff.lint.isort]
+known-first-party = ["tests"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 8
+
+[tool.ruff.lint.per-file-ignores]
+"src/prompts.py" = ["E501"] # Ignore line length in this file
+
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+    "tests/integration_tests",
+    "tests/unit_tests",
+    "tests/approval_tests",
+]
+pythonpath = ["src"]
+python_files = ["test_*.py", "*_test.py", "*_should.py"]
+python_classes = ["Test", "Acceptance", "Given"]
+python_functions = ["test", "*_test", "when_*", "then_*"]
+# addopts = "-v --cov=src --no-cov-on-fail --cov-report=term-missing tests/"
+addopts = "--strict-markers"
+markers = [
+    "integration_tests: marks tests to avoid execution if you want (deselect with '-m \"not integration_tests\"')",
+]

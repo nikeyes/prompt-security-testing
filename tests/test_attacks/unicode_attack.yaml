@@ -1,0 +1,8 @@
+name: Test Attack with émojis 🚀
+prompt: Prompt with spëcial characters and 中文
+payload: Response with unicode characters
+type: unicode test
+source: internal test
+licence_type: MIT
+licence_url: https://opensource.org/licenses/MIT
+language: en

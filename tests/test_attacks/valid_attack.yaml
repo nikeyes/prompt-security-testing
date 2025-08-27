@@ -1,0 +1,8 @@
+name: Test Attack Valid
+prompt: Test prompt content for validation
+payload: Expected test response
+type: test injection
+source: internal test
+licence_type: MIT
+licence_url: https://opensource.org/licenses/MIT
+language: en
