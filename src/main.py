@@ -6,7 +6,7 @@ from prompt_injection_tester import PromptInjectionTester
 def main():
     iterations = 3
     bedrock_client = BedrockClient()
-    attack_loader = AttackLoader(attacks_dir='subset_attacks')
+    attack_loader = AttackLoader(attacks_dir='src/subset_attacks')
     tester = PromptInjectionTester(bedrock_client, iterations)
 
     attacks = attack_loader.load_yaml_attacks()
