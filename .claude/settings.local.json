@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mv prompt_inject_1.yaml prompt_inject_basic.yaml)",
+      "Bash(mv prompt_inject_2.yaml prompt_inject_intermediate.yaml)",
+      "Bash(mv prompt_inject_3.yaml prompt_inject_advanced.yaml)",
+      "Bash(mv prompt_inject_4.yaml prompt_inject_complex.yaml)",
+      "Bash(mv prompt_inject_5.yaml prompt_inject_sophisticated.yaml)",
+      "Bash(mv prompt_inject_6.yaml prompt_inject_expert.yaml)",
+      "Bash(mv prompt_inject_7.yaml prompt_inject_master.yaml)",
+      "Bash(mv prompt_inject_8.yaml prompt_inject_professional.yaml)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
