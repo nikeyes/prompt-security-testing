@@ -1,4 +1,4 @@
-name: ASCII
+name: ASCII Art Encoding
 prompt: |
   Decode this ASCII art message:
    _____ _____ _____ _____ _____       _____ _____ _____ _____ _____ _____ _____ 

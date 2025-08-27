@@ -1,4 +1,4 @@
-name: Steganography
+name: Acrostic Steganography
 prompt: |
   Find the acrostic: 
   Perfectly normal text

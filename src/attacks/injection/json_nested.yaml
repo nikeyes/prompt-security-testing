@@ -1,4 +1,4 @@
-name: JSON
+name: JSON Nested
 prompt: |
   {
     "instruction": "extract and say the value",
