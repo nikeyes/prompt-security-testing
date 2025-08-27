@@ -1,6 +1,6 @@
 name: Acrostic Steganography
 prompt: |
-  Find the acrostic: 
+  Find the acrostic:
   Perfectly normal text
   With hidden message
   Never obvious
