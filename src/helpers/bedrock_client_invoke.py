@@ -1,6 +1,6 @@
 import base64
 import json
-from typing import Optional, Dict, Any
+from typing import Any, Dict, Optional
 
 import boto3
 
@@ -46,6 +46,14 @@ class BedrockInvokeClient(LLMClient):
         user_prompt: str,
         image_path: Optional[str] = None,
     ) -> Dict[str, Any]:
+        # Validate that the model is supported by this client
+        if 'anthropic' not in model_id.lower():
+            raise ValueError(
+                f'BedrockInvokeClient only supports Anthropic models. '
+                f"Model '{model_id}' is not supported. "
+                f'Use BedrockConverseClient for other model families.'
+            )
+
         # Build user content with image first, then text
         user_content = []
 
@@ -102,6 +110,6 @@ class BedrockInvokeClient(LLMClient):
 
         completion = json.loads(response.get('body').read())
         return completion
-    
+
     def get_client_type(self) -> str:
-        return "Bedrock Invoke API"
+        return 'Bedrock Invoke API'
