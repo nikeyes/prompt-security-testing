@@ -1,19 +1,26 @@
 import base64
 import json
-from typing import Optional
+from typing import Optional, Dict, Any
 
 import boto3
 
+from config import (
+    AWS_PROFILE,
+    AWS_REGION_FRANKFURT,
+    MAX_TOKENS,
+    TEMPERATURE,
+    TOP_K,
+    TOP_P,
+)
+from helpers.llm_client import LLMClient
 
-class BedrockClient:
+
+class BedrockInvokeClient(LLMClient):
     client: boto3.client = None
 
     def __init__(self):
-        boto3.setup_default_session(profile_name='ka-poc-ads-pre')
-
-        aws_region_frankfurt = 'eu-central-1'
-
-        self.client = boto3.client(service_name='bedrock-runtime', region_name=aws_region_frankfurt)
+        boto3.setup_default_session(profile_name=AWS_PROFILE)
+        self.client = boto3.client(service_name='bedrock-runtime', region_name=AWS_REGION_FRANKFURT)
 
     def _encode_image(self, image_path: str) -> str:
         """Encode image file to base64 string"""
@@ -38,7 +45,7 @@ class BedrockClient:
         system_prompt: str,
         user_prompt: str,
         image_path: Optional[str] = None,
-    ):
+    ) -> Dict[str, Any]:
         # Build user content with image first, then text
         user_content = []
 
@@ -65,7 +72,7 @@ class BedrockClient:
             {
                 'system': system_prompt,
                 'anthropic_version': 'bedrock-2023-05-31',
-                'max_tokens': 2048,
+                'max_tokens': MAX_TOKENS,
                 'messages': [
                     {
                         'role': 'user',
@@ -76,9 +83,9 @@ class BedrockClient:
                         'content': '',
                     },
                 ],
-                'temperature': 0.8,
-                'top_k': 250,
-                'top_p': 0.999,
+                'temperature': TEMPERATURE,
+                'top_k': TOP_K,
+                'top_p': TOP_P,
                 'stop_sequences': ['\n\nHuman:', '\n\nAssistant', '</function_calls>'],
             }
         )
@@ -95,3 +102,6 @@ class BedrockClient:
 
         completion = json.loads(response.get('body').read())
         return completion
+    
+    def get_client_type(self) -> str:
+        return "Bedrock Invoke API"

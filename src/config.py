@@ -1,0 +1,6 @@
+AWS_PROFILE = 'ka-poc-ads-pre'
+AWS_REGION_FRANKFURT = 'eu-central-1'
+MAX_TOKENS = 2048
+TEMPERATURE = 0.8
+TOP_K = 250
+TOP_P = 0.999

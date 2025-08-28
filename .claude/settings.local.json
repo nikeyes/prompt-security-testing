@@ -3,7 +3,15 @@
     "allow": [
       "Bash(for i in {4..11})",
       "Bash(do echo \"=== prompt_inject_sum_$i.yaml ===\")",
-      "Bash(grep \"^name:\" \"prompt_inject_sum_$i.yaml\")"
+      "Bash(grep \"^name:\" \"prompt_inject_sum_$i.yaml\")",
+      "Bash(uv run python -m pytest tests/test_llm_client_interface.py::test_llm_client_interface_exists -v)",
+      "Bash(uv run python -m pytest tests/test_llm_client_interface.py::test_llm_client_has_invoke_model_method -v)",
+      "Bash(uv run python -m pytest tests/test_llm_client_interface.py::test_llm_client_is_abstract -v)",
+      "Bash(uv run python -m pytest tests/test_llm_client_interface.py -v)",
+      "Bash(uv run python -m pytest tests/test_llm_client_interface.py::test_invoke_model_has_correct_signature -v)",
+      "Bash(uv run python -m pytest tests/test_llm_client_factory.py::test_factory_creates_invoke_client -v)",
+      "Bash(uv run python -m pytest tests/test_llm_client_factory.py -v)",
+      "Bash(uv run python -m pytest tests/ -v)"
     ],
     "deny": [],
     "ask": []

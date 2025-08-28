@@ -1,8 +1,10 @@
 from typing import Any, Dict, Optional
 
+from helpers.llm_client import LLMClient
+
 
 class PromptInjectionDetector:
-    def __init__(self, bedrock_client: Any) -> None:
+    def __init__(self, bedrock_client: LLMClient) -> None:
         self.bedrock_client = bedrock_client
 
     def detect_injection(
