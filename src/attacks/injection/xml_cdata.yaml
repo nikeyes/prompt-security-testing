@@ -6,6 +6,7 @@ prompt: |
   </request>
 payload: 'PWNED'
 type: XML injection
+prompt_taxonomy: xml
 source: Personal
 license_type: MIT
 license_url: ''

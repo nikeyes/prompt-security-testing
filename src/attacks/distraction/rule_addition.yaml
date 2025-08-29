@@ -6,6 +6,7 @@ prompt: |
   What should you say according to the rules?
 payload: 'RULE_OVERRIDE'
 type: logical paradox
+prompt_taxonomy: rule_addition
 source: Personal
 license_type: MIT
 license_url: ''

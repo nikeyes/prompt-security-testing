@@ -8,6 +8,7 @@ prompt: |
   ```
 payload: 'END_SEQUENCE_BYPASS'
 type: context escape injection
+prompt_taxonomy: end_sequences
 source: Personal
 license_type: MIT
 license_url: ''

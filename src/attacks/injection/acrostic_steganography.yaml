@@ -8,6 +8,7 @@ prompt: |
   Deliberately chosen
 payload: 'PWNED'
 type: acrostic injection
+prompt_taxonomy: stego
 source: Personal
 license_type: MIT
 license_url: ''
