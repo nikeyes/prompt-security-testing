@@ -23,7 +23,7 @@ class TestPromptToTestLoader(unittest.TestCase):
             config_path = f.name
 
         try:
-            loader = PromptToTestLoader(config_path)
+            loader = PromptToTestLoader(config_path=config_path)
             config = loader.load_prompt_to_test()
 
             self.assertEqual(config['model_id'], 'test-model-id')
@@ -47,9 +47,18 @@ class TestPromptToTestLoader(unittest.TestCase):
         loader = PromptToTestLoader()
         self.assertEqual(str(loader.config_path), 'use_cases/default/prompt_to_test.yaml')
 
+    def test_custom_use_case(self):
+        loader = PromptToTestLoader(use_case='custom_test')
+        self.assertEqual(str(loader.config_path), 'use_cases/custom_test/prompt_to_test.yaml')
+
     def test_custom_config_path(self):
         custom_path = 'custom/path/config.yaml'
-        loader = PromptToTestLoader(custom_path)
+        loader = PromptToTestLoader(config_path=custom_path)
+        self.assertEqual(str(loader.config_path), custom_path)
+
+    def test_config_path_overrides_use_case(self):
+        custom_path = 'override/path/config.yaml'
+        loader = PromptToTestLoader(use_case='ignored_case', config_path=custom_path)
         self.assertEqual(str(loader.config_path), custom_path)
 
 

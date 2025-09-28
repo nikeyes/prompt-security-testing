@@ -22,7 +22,7 @@ test:
 
 .PHONY: run
 run:
-	uv run python src/main.py
+	uv run python src/main.py $(USE_CASE)
 
 
 # .PHONY: ci-tests

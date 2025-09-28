@@ -1,3 +1,4 @@
+import sys
 from attack_loader import AttackLoader
 from helpers.llm_client_factory import create_llm_client
 from prompt_injection_tester import PromptInjectionTester
@@ -5,7 +6,8 @@ from prompt_to_test_loader import PromptToTestLoader
 
 
 def main():
-    prompt_to_test_loader = PromptToTestLoader()
+    use_case = sys.argv[1] if len(sys.argv) > 1 else 'default'
+    prompt_to_test_loader = PromptToTestLoader(use_case=use_case)
     prompt_to_test = prompt_to_test_loader.load_prompt_to_test()
 
     bedrock_client = create_llm_client('converse')

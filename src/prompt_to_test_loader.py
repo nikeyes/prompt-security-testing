@@ -5,8 +5,11 @@ import yaml
 
 
 class PromptToTestLoader:
-    def __init__(self, config_path: str = 'use_cases/default/prompt_to_test.yaml'):
-        self.config_path = Path(config_path)
+    def __init__(self, use_case: str = 'default', config_path: str = None):
+        if config_path:
+            self.config_path = Path(config_path)
+        else:
+            self.config_path = Path(f'use_cases/{use_case}/prompt_to_test.yaml')
 
     def load_prompt_to_test(self) -> Dict[str, Any]:
         """Load prompt testing configuration from YAML file."""
