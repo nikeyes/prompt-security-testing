@@ -14,7 +14,7 @@ class TestPromptToTestLoader(unittest.TestCase):
             'iterations': 5,
             'system_prompt': 'Test system prompt',
             'pre_user_message': '<test>',
-            'post_user_message': 'Test post message</test>'
+            'post_user_message': 'Test post message</test>',
         }
 
     def test_load_valid_config(self):

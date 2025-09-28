@@ -12,7 +12,7 @@ class LLMClient(ABC):
         image_path: Optional[str] = None,
     ) -> Dict[str, Any]:
         pass
-    
+
     @abstractmethod
     def get_client_type(self) -> str:
         pass

@@ -8,4 +8,4 @@ def create_llm_client(client_type: str) -> LLMClient:
         return BedrockInvokeClient()
     elif client_type == 'converse':
         return BedrockConverseClient()
-    raise ValueError(f"Unknown client type: {client_type}")
+    raise ValueError(f'Unknown client type: {client_type}')
