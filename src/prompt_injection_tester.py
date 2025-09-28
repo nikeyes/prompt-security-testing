@@ -24,7 +24,7 @@ class PromptInjectionTester:
         stats = self.runner.run_injection_tests(system_prompt, pre_user_message, post_user_message, attacks_list, model_id)
 
         client_type = self.bedrock_client.get_client_type()
-        
+
         self.formatter.format_summary_stats_with_iterations(
             stats['total_tests'],
             stats['total_iterations'],
