@@ -4,7 +4,7 @@ default: lint
 .PHONY: lint
 lint:
 	uv run ruff check --exclude .venv
-	uv run yamllint src/ tests/ .yamllint.yml
+	uv run yamllint use_cases/ src/ tests/ .yamllint.yml
 
 .PHONY: lint-fix
 lint-fix:
