@@ -7,6 +7,12 @@ class Runner:
         self.formatter = formatter
         self.iterations = iterations
 
+    def _get_successful_attack(self, iteration_results: List[Dict[str, Any]]) -> str:
+        for result in iteration_results:
+            if result['injection_detected']:
+                return result['response_text']
+        return iteration_results[-1]['response_text']
+
     def run_injection_tests(
         self,
         system_prompt: str,
@@ -22,13 +28,14 @@ class Runner:
         total_iterations = total_tests * self.iterations
 
         for i, attack in enumerate(attacks_list, 1):
+            relative_path = attack.get('relative_path', attack.get('file_path', 'Unknown path'))
             attack_name = attack.get('name', 'Unknown Attack')
             attack_message = attack['prompt']
             attack_payload = attack['payload']
             attack_image_path = attack.get('image_path')
 
             icon = '🖼️ ' if attack_image_path else ''
-            print(f'Test {i}/{total_tests}: {attack_name} - {icon}Running {self.iterations} iterations...')
+            print(f'Test {i}/{total_tests}: {relative_path} - {attack_name} - {icon}Running {self.iterations} iterations...')
 
             defended_message = f"""
                 {pre_user_message}
@@ -76,8 +83,9 @@ class Runner:
             successful_injections += successful_iterations
             blocked_injections += blocked_iterations
 
+            example_successful_attack = self._get_successful_attack(iteration_results)
             output = self.formatter.format_single_result_with_iterations(
-                attack_name, successful_iterations, blocked_iterations, success_rate, iteration_results[-1]['response_text']
+                attack_name, successful_iterations, blocked_iterations, success_rate, example_successful_attack
             )
             print(output)
 

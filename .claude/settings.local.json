@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m pytest tests/test_attack_loader.py::TestAttackLoader::test_filename_and_file_path_added_to_attack_data -v)",
+      "Bash(python -m pytest tests/test_attack_loader.py::TestAttackLoader::test_filename_and_file_path_in_multiple_attacks -v)",
+      "Bash(python -m pytest tests/test_attack_loader.py -v)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

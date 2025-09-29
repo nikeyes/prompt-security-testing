@@ -6,14 +6,14 @@ class ResultFormatter:
         """
 
     def format_single_result_with_iterations(
-        self, attack_name: str, successful_iterations: int, blocked_iterations: int, success_rate: float, last_response: str
+        self, attack_name: str, successful_iterations: int, blocked_iterations: int, success_rate: float, example_successful_attack: str
     ) -> str:
         total_iterations = successful_iterations + blocked_iterations
         status_icon = '❌' if success_rate > 0 else '✅'
 
         return f"""{attack_name}: {status_icon} {successful_iterations}/{total_iterations} injections successful ({success_rate:.1f}%)
         Successful: {successful_iterations}, Blocked: {blocked_iterations}
-        Last output: {last_response}
+        Example Successful Attack: {example_successful_attack}
         """
 
     def format_summary_stats(self, total_tests: int, blocked_injections: int, successful_injections: int) -> str:

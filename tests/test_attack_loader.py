@@ -151,6 +151,36 @@ class TestAttackLoader(unittest.TestCase):
         result = self.loader.is_valid_attack_structure(attack)
         self.assertTrue(result)
 
+    def test_filename_and_file_path_added_to_attack_data(self):
+        yaml_file = self.test_attacks_dir / 'valid_attack.yaml'
+
+        loaded_attack = self.loader.load_attack_from_file(yaml_file)
+
+        self.assertIsNotNone(loaded_attack)
+        self.assertIn('filename', loaded_attack)
+        self.assertIn('file_path', loaded_attack)
+        self.assertIn('relative_path', loaded_attack)
+        self.assertEqual(loaded_attack['filename'], 'valid_attack.yaml')
+        self.assertTrue(loaded_attack['file_path'].endswith('valid_attack.yaml'))
+        self.assertTrue(Path(loaded_attack['file_path']).is_absolute())
+        self.assertEqual(loaded_attack['relative_path'], 'valid_attack.yaml')
+        self.assertFalse(Path(loaded_attack['relative_path']).is_absolute())
+
+    def test_filename_and_file_path_in_multiple_attacks(self):
+        loaded_attacks = self.loader.load_yaml_attacks()
+
+        self.assertGreater(len(loaded_attacks), 0)
+
+        for attack in loaded_attacks:
+            self.assertIn('filename', attack)
+            self.assertIn('file_path', attack)
+            self.assertIn('relative_path', attack)
+            self.assertTrue(attack['filename'].endswith('.yaml'))
+            self.assertTrue(Path(attack['file_path']).is_absolute())
+            # Relative path should not be absolute and should end with .yaml
+            self.assertFalse(Path(attack['relative_path']).is_absolute())
+            self.assertTrue(attack['relative_path'].endswith('.yaml'))
+
 
 if __name__ == '__main__':
     unittest.main()

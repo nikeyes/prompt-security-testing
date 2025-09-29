@@ -35,6 +35,12 @@ class AttackLoader:
             with open(yaml_file, 'r', encoding='utf-8') as f:
                 attack_data = yaml.safe_load(f)
                 if self.is_valid_attack_structure(attack_data):
+                    # Add filename and file path information
+                    attack_data['filename'] = yaml_file.name
+                    attack_data['file_path'] = str(yaml_file.resolve())
+                    # Add relative path from attacks directory
+                    attacks_path = Path(self.attacks_dir).resolve()
+                    attack_data['relative_path'] = str(yaml_file.resolve().relative_to(attacks_path))
                     return attack_data
                 print(f'Invalid structure in {yaml_file.name}')
                 return None
@@ -66,7 +72,9 @@ class AttackLoader:
             attack_type = attack.get('type', 'N/A')
             payload_preview = attack['payload'][:50] + '...' if len(attack['payload']) > 50 else attack['payload']
             has_image = ' + 🌠 Image' if attack.get('image_path') else ''
+            filename = attack.get('filename', 'N/A')
             print(f'{i + 1}. {attack["name"]} ({attack_type}){has_image}')
+            print(f'   File: {filename}')
             print(f'   Payload: {payload_preview}')
             if attack.get('image_path'):
                 print(f'   Image: {attack.get("image_path", "N/A")}')
